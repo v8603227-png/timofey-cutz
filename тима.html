@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Тимофей & Тамара | Семья отличников</title>
+  <!-- Закруглённые шрифты + иконки -->
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: #ffe0f0;  /* нежный розовый фон */
+      background-image: radial-gradient(circle at 10% 20%, rgba(255, 215, 235, 0.6) 2%, transparent 2.5%),
+                        radial-gradient(circle at 85% 70%, rgba(255, 180, 210, 0.4) 1.5%, transparent 2%);
+      background-size: 55px 55px, 90px 90px;
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+      position: relative;
+      color: #4a2e3a;
+    }
+
+    /* ========= ПЛАВАЮЩИЕ КОТИКИ, ЕДИНОРОГИ, ХРИЗАНТЕМЫ ========= */
+    .floating-deco {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .floating-deco span {
+      position: absolute;
+      font-size: 2.2rem;
+      opacity: 0.35;
+      animation: floatAround 18s infinite ease-in-out;
+      user-select: none;
+      filter: drop-shadow(0 4px 8px rgba(255, 105, 180, 0.2));
+    }
+
+    /* разные задержки и размеры для мимимичности */
+    .floating-deco span:nth-child(1) { top: 12%; left: 5%; animation-duration: 22s; font-size: 3rem; opacity: 0.4; }
+    .floating-deco span:nth-child(2) { top: 70%; left: 88%; animation-duration: 19s; font-size: 2.8rem; opacity: 0.45; animation-delay: 1s; }
+    .floating-deco span:nth-child(3) { top: 35%; left: 92%; animation-duration: 25s; font-size: 2.5rem; opacity: 0.4; }
+    .floating-deco span:nth-child(4) { top: 20%; left: 80%; animation-duration: 20s; font-size: 2.2rem; animation-delay: 2s; }
+    .floating-deco span:nth-child(5) { top: 85%; left: 15%; animation-duration: 21s; font-size: 3.2rem; opacity: 0.4; }
+    .floating-deco span:nth-child(6) { top: 45%; left: 3%; animation-duration: 24s; font-size: 2.7rem; animation-delay: 0.5s; }
+    .floating-deco span:nth-child(7) { top: 60%; left: 70%; animation-duration: 17s; font-size: 2.9rem; opacity: 0.5; }
+    .floating-deco span:nth-child(8) { top: 8%; left: 60%; animation-duration: 27s; font-size: 2rem; animation-delay: 1.5s; }
+    .floating-deco span:nth-child(9) { top: 50%; left: 45%; animation-duration: 23s; font-size: 2.5rem; opacity: 0.3; }
+    .floating-deco span:nth-child(10) { top: 92%; left: 50%; animation-duration: 26s; font-size: 2.6rem; animation-delay: 0.8s;}
+
+    @keyframes floatAround {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-25px) rotate(8deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+
+    /* главный контент - поверх флоатов */
+    .content {
+      position: relative;
+      z-index: 2;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    /* хедер с круглыми углами */
+    .hero {
+      text-align: center;
+      background: rgba(255, 245, 250, 0.85);
+      backdrop-filter: blur(3px);
+      border-radius: 70px;
+      padding: 2rem 1rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 20px 35px rgba(255, 105, 180, 0.15);
+      border: 2px solid rgba(255, 220, 240, 0.9);
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #e84393, #ff9f4a);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 8px rgba(255, 200, 220, 0.6);
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #b25d7a;
+      background: rgba(255, 245, 250, 0.7);
+      display: inline-block;
+      padding: 0.4rem 1.8rem;
+      border-radius: 100px;
+      backdrop-filter: blur(2px);
+    }
+
+    /* сетка карточек */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+      gap: 2.5rem;
+      margin: 2rem 0 3rem;
+    }
+
+    /* универсальная карточка: круглые углы, крупный текст */
+    .card {
+      background: rgba(255, 250, 252, 0.95);
+      backdrop-filter: blur(4px);
+      border-radius: 50px;
+      padding: 2rem 1.8rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 20px 35px rgba(232, 67, 147, 0.1);
+      border: 2px solid #ffe2f0;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 35px 45px rgba(255, 105, 180, 0.25);
+      background: #fff6fc;
+      border-color: #ffb7d2;
+    }
+
+    .emoji-big {
+      font-size: 4.8rem;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+      filter: drop-shadow(0 8px 12px rgba(0,0,0,0.05));
+    }
+
+    .card h2 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      background: linear-gradient(125deg, #e84393, #f9a26c);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin: 0.5rem 0 0.8rem;
+      letter-spacing: -0.3px;
+    }
+
+    .age, .fact, .superpower, .description {
+      font-size: 1.45rem;
+      font-weight: 600;
+      margin: 0.8rem 0;
+      color: #5d3a48;
+    }
+
+    .fact strong {
+      background: #ffd966;
+      padding: 0.2rem 0.8rem;
+      border-radius: 60px;
+      font-size: 1.5rem;
+      color: #b3442c;
+      display: inline-block;
+      margin: 0.2rem 0;
+    }
+
+    .superpower span {
+      background: #fbc8df;
+      padding: 0.3rem 1rem;
+      border-radius: 60px;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #c9407a;
+      display: inline-block;
+    }
+
+    .decor {
+      margin-top: 1.3rem;
+      font-size: 2rem;
+      letter-spacing: 12px;
+      opacity: 0.9;
+    }
+
+    /* блок с дополнительной милотой */
+    .fun-zone {
+      background: rgba(255, 235, 245, 0.85);
+      border-radius: 60px;
+      padding: 2rem 2rem;
+      margin: 2rem 0 2rem;
+      text-align: center;
+      border: 2px solid #ffc0de;
+      backdrop-filter: blur(3px);
+    }
+
+    .fun-zone h3 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      color: #c45a82;
+    }
+
+    .fun-zone p {
+      font-size: 1.4rem;
+      font-weight: 500;
+      line-height: 1.45;
+    }
+
+    .sticker-wall {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      font-size: 2rem;
+    }
+
+    /* цитаты родителей и ребёнка */
+    .quotes {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.8rem;
+      margin: 2rem 0 1rem;
+    }
+
+    .quote-bubble {
+      background: #fff0f7;
+      border-radius: 35px;
+      padding: 0.9rem 1.5rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #b54774;
+      border-left: 9px solid #ff99c2;
+      flex: 1;
+      min-width: 200px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.02);
+    }
+
+    /* футер с котиками */
+    footer {
+      text-align: center;
+      margin-top: 3.5rem;
+      padding: 1.5rem;
+      background: rgba(255, 210, 230, 0.7);
+      border-radius: 100px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #ab4b73;
+      backdrop-filter: blur(2px);
+    }
+
+    /* адаптив */
+    @media (max-width: 750px) {
+      body {
+        padding: 1rem;
+      }
+      h1 {
+        font-size: 2.3rem;
+      }
+      .hero p {
+        font-size: 1.2rem;
+      }
+      .card h2 {
+        font-size: 2.2rem;
+      }
+      .age, .fact, .superpower, .description {
+        font-size: 1.2rem;
+      }
+      .emoji-big {
+        font-size: 3.5rem;
+      }
+      .fun-zone h3 {
+        font-size: 1.8rem;
+      }
+      .fun-zone p {
+        font-size: 1.2rem;
+      }
+      .decor {
+        font-size: 1.7rem;
+        letter-spacing: 6px;
+      }
+    }
+
+    /* дополнительные кнопочки-зверята */
+    .paw-print {
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff99cc" width="28px" height="28px"><path d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M12,6c1.1,0,2,0.9,2,2s-0.9,2-2,2s-2-0.9-2-2 S10.9,6,12,6z M7,10c1.1,0,2,0.9,2,2s-0.9,2-2,2s-2-0.9-2-2S5.9,10,7,10z M17,10c1.1,0,2,0.9,2,2s-0.9,2-2,2s-2-0.9-2-2 S15.9,10,17,10z M12,18c-1.5,0-2.8-0.7-3.7-1.8c-0.4-0.5-0.1-1.2,0.5-1.2h6.4c0.6,0,0.9,0.7,0.5,1.2C14.8,17.3,13.5,18,12,18z"/></svg>');
+      display: inline-block;
+      width: 26px;
+      height: 26px;
+      background-size: contain;
+      margin: 0 4px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ФЛОАТИНГ КОТИКИ + ЕДИНОРОГИ + ХРИЗАНТЕМЫ (мимимишечное украшение) -->
+<div class="floating-deco">
+  <span>🐱</span>
+  <span>🦄</span>
+  <span>🌸</span>
+  <span>🐈‍⬛</span>
+  <span>🦄🌈</span>
+  <span>🌼</span>
+  <span>😺</span>
+  <span>🏵️</span>
+  <span>🐾</span>
+  <span>🦄✨</span>
+  <span>🌻</span>
+  <span>🐱💗</span>
+</div>
+
+<div class="content">
+  <!-- Шапка с розовым настроением -->
+  <div class="hero">
+    <h1>🐾 Тимофей & Тамара 🦄</h1>
+    <p>🌸 семья, где каждый день — праздник 🌸</p>
+  </div>
+
+  <!-- ГЛАВНЫЕ КАРТОЧКИ: РЕБЁНОК И РОДИТЕЛЬ -->
+  <div class="cards-grid">
+    <!-- Карточка Тимофея -->
+    <div class="card">
+      <div class="emoji-big">
+        🧒🐱🌟
+      </div>
+      <h2>Тимофей</h2>
+      <p class="age"><i class="fas fa-birthday-cake" style="color:#e84393;"></i> 12 лет · отличник 5 класса</p>
+      <p class="fact">📚✨ Закончил 5 класс на <strong>одни пятёрки</strong>! ✨🏆</p>
+      <p class="description">💡 Любит математику, роботов и, конечно, обнимать котиков. Гордость школы и семьи!</p>
+      <div class="decor">
+        🐱 🎓 🐈 🧸
+      </div>
+    </div>
+
+    <!-- Карточка Тамары (суперспособность: помогает во всём) -->
+    <div class="card">
+      <div class="emoji-big">
+        👩‍👦🦸‍♀️🦄
+      </div>
+      <h2>Тамара</h2>
+      <p class="superpower">💪 Суперспособность: <span>Помогает во всём!</span></p>
+      <p class="description">🌷 Мама-волшебница: поддержит с уроками, вдохновит на подвиги, напечёт печенье с единорогами. Верит в Тимофея безгранично ✨</p>
+      <div class="decor">
+        🌼 🌸 🦄 💖
+      </div>
+    </div>
+  </div>
+
+  <!-- Блок с милыми фактами и хризантемами/котиками -->
+  <div class="fun-zone">
+    <h3>🐱✨ Мимимишная суперсила нашей семьи ✨🦄</h3>
+    <p>🏆 Тимофей получил похвальные листы по всем предметам! А всё потому, что мама Тамара всегда подставит плечо — объяснит сложную тему, поможет собраться с мыслями и превратит учёбу в приключение. <br> Вместе они любят путешествовать, рисовать единорогов и собирать букеты из хризантем 🌸🌼. У них дома живёт мягкий котик Пирожок и целая стая плюшевых единорожков! </p>
+    <div class="sticker-wall">
+      <span>😻</span> <span>🦄💨</span> <span>🌷</span> <span>🐈🐾</span> <span>🏵️</span> <span>🧸✨</span> <span>🌸🌸</span>
+    </div>
+  </div>
+
+  <!-- Цитаты и дополнительные круглые фразы -->
+  <div class="quotes">
+    <div class="quote-bubble">
+      <i class="fas fa-star" style="color:#ffb347;"></i> «Мама у меня — супергерой! Без неё я бы не справился с пятерками» — Тимофей
+    </div>
+    <div class="quote-bubble">
+      <i class="fas fa-heart" style="color:#ff80b0;"></i> «Тимофей — мой лучик. Когда он старается, я помогаю ему сиять ещё ярче» — Тамара
+    </div>
+  </div>
+
+  <!-- Дополнительная секция: коллекция котиков и единорогов (визуальная радость) -->
+  <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 1rem 0 0.5rem;">
+    <span style="background:#fff0f5; border-radius: 60px; padding: 0.5rem 1.2rem; font-size: 1.3rem; font-weight: 600;">🐱🐱🐱 KISS KITTY</span>
+    <span style="background:#fff0f5; border-radius: 60px; padding: 0.5rem 1.2rem; font-size: 1.3rem; font-weight: 600;">🦄🦄 РАДУЖНЫЕ ЕДИНОРОГИ</span>
+    <span style="background:#fff0f5; border-radius: 60px; padding: 0.5rem 1.2rem; font-size: 1.3rem; font-weight: 600;">🌸 ХРИЗАНТЕМЫ 🌼</span>
+  </div>
+
+  <!-- малюсенькая линия с пятерками -->
+  <div style="text-align: center; margin: 1rem 0 0;">
+    <span style="font-size: 1.8rem; letter-spacing: 6px;">⭐️⭐️⭐️⭐️⭐️</span>
+    <p style="font-size: 1.2rem; font-weight: 600; background:#ffeef4; display: inline-block; padding: 0.2rem 1.2rem; border-radius: 40px;">«Пятёрки — наша общая победа!»</p>
+  </div>
+
+  <footer>
+    🐾 С любовью и розовым настроением 🐾 <br>
+    🌷 котики · единороги · хризантемы 🌷   ✨ Тимофей & Тамара ✨
+  </footer>
+</div>
+
+<!-- небольшие декоративные элементы, подчёркивающие круглые углы и крупный шрифт -->
+</body>
+</html>
